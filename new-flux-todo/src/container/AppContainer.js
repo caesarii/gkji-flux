@@ -1,5 +1,5 @@
 
-import AppView from '../views/app'
+import AppView from '../view/app'
 import {Container} from 'flux/utils'
 import action from '../action/action'
 import DraftStore from '../store/DraftStore'
