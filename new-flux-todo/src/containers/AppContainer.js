@@ -1,5 +1,5 @@
 
-import AppView from '../views/AppView'
+import AppView from '../views/app'
 import {Container} from 'flux/utils'
 import TodoActions from '../data/TodoActions'
 import TodoDraftStore from '../data/TodoDraftStore'
