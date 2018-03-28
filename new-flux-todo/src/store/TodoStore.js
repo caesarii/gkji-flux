@@ -4,12 +4,12 @@ import Counter from './Counter'
 import Immutable from 'immutable'
 import {ReduceStore} from 'flux/utils'
 import Todo from './Todo'
-import TodoActionTypes from './TodoActionTypes'
-import TodoDispatcher from './TodoDispatcher'
+import ationType from '../action/acitonType'
+import dispatcher from '../dispatcher'
 
 class TodoStore extends ReduceStore {
   constructor() {
-    super(TodoDispatcher);
+    super(dispatcher);
   }
 
   getInitialState() {
@@ -18,7 +18,7 @@ class TodoStore extends ReduceStore {
 
   reduce(state, action) {
     switch (action.type) {
-      case TodoActionTypes.ADD_TODO:
+      case ationType.addTodo:
         // Don't add todos with no text.
         if (!action.text) {
           return state;
@@ -30,20 +30,20 @@ class TodoStore extends ReduceStore {
           complete: false,
         }));
 
-      case TodoActionTypes.DELETE_COMPLETED_TODOS:
+      case ationType.deleteCompletedTodo:
         return state.filter(todo => !todo.complete);
 
-      case TodoActionTypes.DELETE_TODO:
+      case ationType.deleteTodo:
         return state.delete(action.id);
 
-      case TodoActionTypes.EDIT_TODO:
+      case ationType.editTodo:
         return state.setIn([action.id, 'text'], action.text);
 
-      case TodoActionTypes.TOGGLE_ALL_TODOS:
+      case ationType.toggleAllTodo:
         const areAllComplete = state.every(todo => todo.complete);
         return state.map(todo => todo.set('complete', !areAllComplete));
 
-      case TodoActionTypes.TOGGLE_TODO:
+      case ationType.toggleTodo:
         return state.update(
           action.id,
           todo => todo.set('complete', !todo.complete),
