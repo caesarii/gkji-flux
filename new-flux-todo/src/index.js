@@ -1,5 +1,5 @@
 
-import AppContainer from './containers/AppContainer'
+import AppContainer from './container/AppContainer'
 import React from 'react'
 import ReactDOM from 'react-dom'
 

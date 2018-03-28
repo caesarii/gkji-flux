@@ -74,9 +74,6 @@ label[for='toggle-all'] {
     margin: auto 0;
     /* Mobile Safari */
     border: none;
-    -webkit-appearance: none;
-    -ms-appearance: none;
-    -o-appearance: none;
     appearance: none;
 }
 
