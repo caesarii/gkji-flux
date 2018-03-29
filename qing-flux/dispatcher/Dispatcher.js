@@ -1,8 +1,11 @@
 
+// dispatcher
+// register callback
+// dispatch action and invoke callback
 
 class Dispatcher {
     constructor() {
-        // 所有的回调
+        // 所有的 dispatch callback
         this._callbacks = {}
         
         // 是否正在 dispatch
@@ -69,7 +72,7 @@ class Dispatcher {
         delete this._callbacks[id]
     }
     
-    // 执行一组 callback 的执行
+    // 组织 callback 的执行顺序, 当前 callback 在执行的 callbacks 后执行
     // 该方法只能由 callback 调用
     // 可以指定多个等待的callback, 所以参数一个 id array
     waitFor(ids) {
@@ -110,4 +113,144 @@ class Dispatcher {
     isDispatching() {
         return this._isDispatching
     }
+}
+
+module.exports = Dispatcher
+
+if(require.main === module) {
+    
+    const testRegisterAndDispatch = () => {
+        const d = new Dispatcher()
+    
+        const callback1 = (payload) => {
+            console.log('callback 1', payload)
+        }
+        
+        const callback2 = (payload) => {
+            console.log('callback 2', payload)
+        }
+        d.register(callback1)
+        d.register(callback2)
+        
+        const action1 = {
+            type: 'one',
+            data: 'action 1'
+        }
+        
+        const action2 = {
+            type: 'two',
+            data: 'action 2'
+        }
+        d.dispatch(action1)
+        d.dispatch(action2)
+    }
+    
+    const testAction = () => {
+        const d = new Dispatcher()
+    
+        const callback1 = (payload) => {
+            if(payload.type === 'one') {
+                console.log('callback 1', payload)
+            }
+        }
+        
+        const callback2 = (payload) => {
+            if(payload.type === 'two') {
+                console.log('callback 2', payload)
+            }
+        }
+        d.register(callback1)
+        d.register(callback2)
+        
+        const action1 = {
+            type: 'one',
+            data: 'action 1'
+        }
+        
+        const action2 = {
+            type: 'two',
+            data: 'action 2'
+        }
+        d.dispatch(action1)
+        d.dispatch(action2)
+    }
+    
+    const testUnregister = () => {
+        const d = new Dispatcher()
+    
+        const callback1 = (payload) => {
+            console.log('callback 1', payload)
+        }
+        
+        const id1 = d.register(callback1)
+        
+        const action1 = {
+            type: 'one',
+            data: 'action 1'
+        }
+        
+        d.dispatch(action1)
+        
+        d.unregister(id1)
+        
+        d.dispatch(action1)
+    }
+    
+    const testIsdispatching = () => {
+        const d = new Dispatcher()
+    
+        const callback1 = (payload) => {
+            console.log('callback 1', payload)
+            console.log('isDispatching', d.isDispatching())
+        }
+        
+        const id1 = d.register(callback1)
+        
+        const action1 = {
+            type: 'one',
+            data: 'action 1'
+        }
+        
+        console.log('isDispatching', d.isDispatching())
+        d.dispatch(action1)
+        console.log('isDispatching', d.isDispatching())
+    }
+
+    const testWaitFor = () => {
+        const d = new Dispatcher()
+    
+        const callback1 = (payload) => {
+            d.waitFor([id2])
+            console.log('callback 1', payload)
+        }
+        
+        const callback2 = (payload) => {
+            console.log('callback 2', payload)
+        }
+        
+        const id1 = d.register(callback1)
+        const id2 = d.register(callback2)
+        
+        console.log('id', id1, id2)
+        
+        const action1 = {
+            type: 'one',
+            data: 'action 1'
+        }
+        
+        d.dispatch(action1)
+        
+        
+    }
+    
+    // testRegisterAndDispatch()
+    //
+    // testAction()
+    //
+    // testUnregister()
+    //
+    // testIsdispatching()
+    //
+    // testWaitFor()
+    
 }
