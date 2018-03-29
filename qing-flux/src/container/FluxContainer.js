@@ -1,9 +1,5 @@
 
-// import FluxStore from '../store/FluxStore'
-
 const FluxContainerSubscripts = require('./FluxContainerSubscriptions')
-// const {Component} = require('react')
-// const shallowEqual = require('shallowEqual')
 
 const DEFAULT_OPTIONS = {
     pure: true,
