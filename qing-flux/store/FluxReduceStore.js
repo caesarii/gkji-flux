@@ -1,6 +1,9 @@
 
-const FluxStore = require('qing-flux/store/FluxStore')
+const FluxStore = require('./FluxStore')
 
+// Store 的基类
+// 核心就是 _onDispatch 方法, 该方法将注册到 dispatcher
+// 在 dispatch 之后, onDispatch 将调用 reduce 更新状态, 并触发 store change 事件
 class FluxReduceStore extends FluxStore {
     constructor(dispatcher) {
         super(dispatcher)
@@ -34,26 +37,137 @@ class FluxReduceStore extends FluxStore {
     
     // 在 store 初始化时注册为 dispatcher 的回调
     __onDispatch(action) {
+        // TODO 应该对 changed 和 emitter 进行封装
         // before change
-        this.__changed = false
+        this.__setChanged(false)
         
         // reduce state
         const startState = this._state
         // endState 不能是 undefined
         const endState = this.reduce(startState, action)
         
-        // change
+        // 更新状态: 更新状态的方式以 新状态 代替 旧状态
+        // 通过 areEqual 可以改变更新方式
         if(!this.areEqual(startState, endState)) {
             this._state = endState
-            
-            this.__emitChange()
+            this.__setChanged(true)
         }
         
         // 触发 change 事件
-        if(this.__changed) {
-            this.__emitter.emit(this.__changeEvent)
+        if(this.hasChanged()) {
+            this.__emitChange()
         }
     }
 }
 
 module.exports = FluxReduceStore
+
+if(require.main === module) {
+    const Dispatcher = require('../dispatcher/Dispatcher')
+    const log = console.log
+
+    const testGetState = () => {
+        const d = new Dispatcher()
+        
+        class Store extends FluxReduceStore {
+            constructor(d) {
+                super(d)
+                
+            }
+            
+            getInitialState() {
+                return {
+                    name: 'qinghe',
+                }
+            }
+            
+            reduce(state, action) {
+                const {type, data} = action
+                switch(type) {
+                    case 'click':
+                        log('action click', data)
+                        return {...state, ...data}
+                    case 'dblclick':
+                        log('action dblclick', data)
+                        return {...state, ...data}
+                    default:
+                        state
+                }
+            }
+        }
+        
+        const s = new Store(d)
+        
+        
+        const initailState = s.getInitialState()
+        log('init state', initailState)
+        
+        const actionClick = {
+            type: 'click',
+            data: {
+                click: 'click event'
+            }
+        }
+        d.dispatch(actionClick)
+        
+        const newState = s.getState()
+        console.log('new state', newState)
+    }
+    
+    
+    const testStoreChange = () => {
+        const d = new Dispatcher()
+    
+        const log = console.log
+        
+        class Store extends FluxReduceStore {
+            constructor(d) {
+                super(d)
+                
+            }
+            
+            getInitialState() {
+                return {
+                    name: 'qinghe',
+                }
+            }
+            
+            reduce(state, action) {
+                const {type, data} = action
+                switch(type) {
+                    case 'click':
+                        log('action click', data)
+                        return {...state, ...data}
+                    case 'dblclick':
+                        log('action dblclick', data)
+                      
+                        return {...state, ...data}
+                    default:
+                        state
+                }
+            }
+        }
+        
+        const s = new Store(d)
+        
+        const callbackStoreChange = () => {
+            console.log('callback store change')
+        }
+        
+        s.addListener(callbackStoreChange)
+        
+        const actionClick = {
+            type: 'click',
+            data: {
+                click: 'click event'
+            }
+        }
+        d.dispatch(actionClick)
+    }
+    
+    testGetState()
+    
+    testStoreChange()
+    
+    
+}
