@@ -1,7 +1,16 @@
 
-const {EventEmitter} = require('fbemitter')
+// TODO 用 nodejs eventemitter 进行测试
+// !!!!!!!!!!!! 更新 addListener 中的 on 为 addListener
+// const {EventEmitter} = require('fbemitter')
+const Events = require('events')
+class EventEmitter extends Events { }
 
-// 定义 store 的基本功能
+
+// FluxReduceStore 的 基类
+// 核心就是初始化时将 FluxReduceStore 的 _onDispatch 注册到 dispatcher
+// 提供订阅 store change 事件的 addListenr api
+// 以及供 FluxReduceStore 调用的 hasChanged, setChanged, emitChange 方法
+
 // 实际使用时继承 FluxReduceStore
 class FluxStore {
     constructor(dispatcher) {
@@ -45,16 +54,40 @@ class FluxStore {
         return this.__changed
     }
 
+    __setChanged(bool) {
+        this.__changed = bool
+    }
+    
     __emitChange() {
-        this.__changed = true
+        this.__emitter.emit(this.__changeEvent)
     }
     
     
     // 注册 change 事件
     // 返回 token 对象, token.remove() 将移除注册
     addListener(callback) {
-        return this.__emitter.addListener(this.__changeEvent, callback)
+        return this.__emitter.on(this.__changeEvent, callback)
+    }
+}
+
+module.exports = FluxStore
+
+
+if(require.main === module)  {
+    const Dispatcher = require('../dispatcher/Dispatcher')
+    const d = new Dispatcher()
+    const log = console.log
+    
+    
+    const testEmitter = () => {
+        const fluxStore = new FluxStore(d)
+        fluxStore.addListener(() => {
+            log('callback store change')
+        })
+        
+        fluxStore.__emitChange()
     }
     
     
+    testEmitter()
 }
