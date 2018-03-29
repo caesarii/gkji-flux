@@ -78,7 +78,6 @@ if(require.main === module)  {
     const d = new Dispatcher()
     const log = console.log
     
-    
     const testEmitter = () => {
         const fluxStore = new FluxStore(d)
         fluxStore.addListener(() => {
@@ -87,7 +86,6 @@ if(require.main === module)  {
         
         fluxStore.__emitChange()
     }
-    
     
     testEmitter()
 }

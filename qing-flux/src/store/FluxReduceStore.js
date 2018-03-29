@@ -169,5 +169,4 @@ if(require.main === module) {
     
     testStoreChange()
     
-    
 }

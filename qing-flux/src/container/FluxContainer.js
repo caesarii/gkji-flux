@@ -1,9 +1,9 @@
 
-import FluxStore from '../store/FluxStore'
+// import FluxStore from '../store/FluxStore'
 
-const FluxContainerSubscripts = require('FluxContainerSubscripts')
-const {Component} = require('react')
-const shallowEqual = require('shallowEqual')
+const FluxContainerSubscripts = require('./FluxContainerSubscriptions')
+// const {Component} = require('react')
+// const shallowEqual = require('shallowEqual')
 
 const DEFAULT_OPTIONS = {
     pure: true,
@@ -42,13 +42,16 @@ function create(Base, options={}) {
         constructor(props, context) {
             super(props, context)
             this._subscriptions = new FluxContainerSubscripts()
+            // 设置 stores
             this._subscriptions.setStores(getStores(props))
+            // 注册 subscription 的回调
             this._subscriptions.addListener(() => {
                 this.setState((prevState, currentProps) => {
                     calculateState(prevState, currentProps, context)
                 })
             })
             
+            // ?
             const calculatedState = calculateState(undefined, props, context)
             this.state = {
                 // TODO delete ?
@@ -89,5 +92,69 @@ function create(Base, options={}) {
 }
 
 module.exports = create
+
+if(require.main === module) {
+    const log = console.log
+    
+    const react = require('../../library/react')
+    const {Component} = react
+    
+    const Dispatcher = require('../dispatcher/Dispatcher')
+    const FluxReduceStore = require('../store/FluxReduceStore')
+    
+    
+    const testCreate = () => {
+        // store
+        const d = new Dispatcher()
+        class Store extends FluxReduceStore {
+            constructor(d) {
+                super(d)
+                
+            }
+            
+            getInitialState() {
+                return {
+                    name: 'qinghe',
+                }
+            }
+            
+            reduce(state, action) {
+                const {type, data} = action
+                switch(type) {
+                    case 'click':
+                        log('action click', data)
+                        return {...state, ...data}
+                    case 'dblclick':
+                        log('action dblclick', data)
+                        return {...state, ...data}
+                    default:
+                        state
+                }
+            }
+        }
+        const appStore = new Store(d)
+        
+        // container
+        class BaseContainer extends Component {
+            static getStores() {
+                return [appStore]
+            }
+            
+            static calculateState() {
+                return {
+                    app: appStore.getState()
+                }
+            }
+            
+            render() {
+               log('container props', this.props)
+            }
+        }
+        
+        const container = create(BaseContainer)
+    }
+    
+    testCreate()
+}
 
 
