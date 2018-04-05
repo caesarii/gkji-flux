@@ -1,13 +1,16 @@
-import {
-    INCR_NUM,
-    DECR_NUM
-} from '../constants/actionTypes';
+import actionType from './actionTypes';
 
-export const setIncr = (num) => ({
-    type: INCR_NUM,
+const increaseNumber = (num) => ({
+    type: actionType.increase,
     num
 });
-export const setDecr = (num) => ({
-    type: DECR_NUM,
+const decreaseNumber = (num) => ({
+    type: actionType.decrease,
     num
 });
+
+
+export default {
+    increaseNumber,
+    decreaseNumber,
+}

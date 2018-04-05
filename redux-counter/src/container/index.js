@@ -1,8 +1,7 @@
 import {connect} from 'react-redux';
-import {setIncr, setDecr} from '../action';
+import actionCreator from '../action/index';
 import AppView from '../components/counter'
-import {INCR_NUM, DECR_NUM} from '../constants/actionTypes'
-
+import actionType from '../action/actionTypes'
 
 const mapStateToProps = (state) => {
     return {
@@ -12,10 +11,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
     onClickCounter: (type, numer) => {
-        if(type === INCR_NUM) {
-            dispatch(setIncr(numer));
-        } else {
-            dispatch(setDecr(numer));
+        if(type === actionType.increase) {
+            dispatch(actionCreator.increaseNumber(numer));
+        } else if(type === actionType.decrease) {
+            dispatch(actionCreator.decreaseNumber(numer));
         }
     }
 });

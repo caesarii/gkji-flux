@@ -1,18 +1,12 @@
 import {combineReducers} from 'redux';
-import {
-    INCR_NUM,
-    DECR_NUM
-} from '../constants/actionTypes';
+import actionTypes from '../action/actionTypes';
 
 const counterReducer = (state = 1, action) => {
     switch (action.type) {
-
-        case INCR_NUM:
+        case actionTypes.increase:
             return action.num + 1;
-
-        case DECR_NUM:
+        case actionTypes.decrease:
             return action.num - 1;
-
         default:
             return state;
     }
