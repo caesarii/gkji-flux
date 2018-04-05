@@ -4,7 +4,7 @@ import actionType from '../../action/actionTypes'
 const {increase, decrease} = actionType
 
 const AppView = (props) => {
-    // 从这里看出 react 视图的更新, 既是 appContainer 中进行多次 setState 这里可能只更新一次
+    // 从这里看出 react 视图的更新, 既是 appContainer 中进行多次 setState 这里可能只更新一次(快速点击)
     console.log('view update', props)
     const {current, onClickCounter} = props
     return (
