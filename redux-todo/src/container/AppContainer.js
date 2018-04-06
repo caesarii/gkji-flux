@@ -2,9 +2,9 @@
 import AppView from '../view/app'
 import {Container} from 'flux/utils'
 import action from '../action/action'
-import DraftStore from '../store/DraftStore'
-import EditStore from '../store/EditStore'
-import TodoStore from '../store/TodoStore'
+import DraftStore from '../reducer/DraftStore'
+import EditStore from '../reducer/EditStore'
+import TodoStore from '../reducer/TodoStore'
 
 function getStores() {
   return [
