@@ -3,7 +3,6 @@ import AppView from '../components/counter'
 import actionType from '../action/actionTypes'
 import React, { Component } from 'react'
 
-
 class App extends Component {
     constructor (props) {
         super(props)
