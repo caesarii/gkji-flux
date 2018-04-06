@@ -1,66 +1,65 @@
 import actionType from './acitonType'
-import dispatcher from '../dispatcher'
 
 const Actions = {
     addTodo (text) {
-        dispatcher.dispatch({
+        return {
             type: actionType.addTodo,
-            text,
-        })
+            data: text,
+        }
     },
     
     deleteCompletedTodos () {
-        dispatcher.dispatch({
+        return {
             type: actionType.deleteCompletedTodo,
-        })
+        }
     },
     
     deleteTodo (id) {
-        dispatcher.dispatch({
+        return {
             type: actionType.deleteTodo,
-            id,
-        })
+            data: id,
+        }
     },
     
     editTodo (id, text) {
-        dispatcher.dispatch({
+        return {
             type: actionType.editTodo,
             id,
-            text,
-        })
+            data: text,
+        }
     },
     
     startEditingTodo (id) {
-        dispatcher.dispatch({
+        return {
             type: actionType.startEditTodo,
-            id,
-        })
+            data: id,
+        }
     },
     
     stopEditingTodo () {
-        dispatcher.dispatch({
+        return {
             type: actionType.stopEditTodo,
-        })
+        }
     },
     
     toggleAllTodos () {
-        dispatcher.dispatch({
+        return {
             type: actionType.toggleAllTodo,
-        })
+        }
     },
     
     toggleTodo (id) {
-        dispatcher.dispatch({
+        return {
             type: actionType.toggleTodo,
-            id,
-        })
+            data: id,
+        }
     },
     
     updateDraft (text) {
-        dispatcher.dispatch({
+        return {
             type: actionType.updateDraft,
-            text,
-        })
+            data: ßtext,
+        }
     },
 }
 
