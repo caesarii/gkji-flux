@@ -5,7 +5,7 @@ import action from '../action/action'
 import TodoReducer from '../reducer/TodoStore'
 import editReducer from '../reducer/EditStore'
 
-const reducer = combineReducers(TodoReducer, editReducer)
+const reducer = combineReducers({TodoReducer, editReducer})
 const store = createStore(reducer)
 
 class Main extends Component {
@@ -26,23 +26,23 @@ class Main extends Component {
         })
         
         const onToggleAllTodos = () => {
-            store.dispatch(action.onToggleAllTodos)
+            store.dispatch(action.toggleAllTodos())
         }
         
         const onDeleteTodo = () => {
-            store.dispatch(action.onDeleteTodo)
+            store.dispatch(action.deleteTodo())
         }
         
         const onEditTodo = () => {
-            store.dispatch(action.onEditTodo)
+            store.dispatch(action.editTodo())
         }
         
         const onStartEditingTodo = () => {
-            store.dispatch(action.onStartEditingTodo)
+            store.dispatch(action.startEditingTodo())
         }
         
         const onStopEditingTodo = () => {
-            store.dispatch(action.onStopEditingTodo)
+            store.dispatch(action.stopEditingTodo())
         }
         
         const onToggleTodo = () => {

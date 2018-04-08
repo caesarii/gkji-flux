@@ -23,7 +23,7 @@ import actionType from '../action/acitonType'
 //     }
 // }
 
-const TodoDraftReducer = (state, action) => {
+const TodoDraftReducer = (state={draft: ''}, action) => {
     switch (action.type) {
         case actionType.addTodo:
             return ''

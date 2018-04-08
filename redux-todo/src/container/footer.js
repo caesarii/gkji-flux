@@ -25,7 +25,7 @@ class footer extends Component {
         })
         
         const onDeleteCompletedTodos = () => {
-            store.dispatch(action.onDeleteCompletedTodos)
+            store.dispatch(action.deleteCompletedTodos())
         }
         
         

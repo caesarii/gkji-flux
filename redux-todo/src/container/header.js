@@ -32,11 +32,11 @@ class Header extends Component {
         // }
         //
         const onAdd = () => {
-            store.dispatch(action.onAdd)
+            store.dispatch(action.addTodo())
         }
         
         const onUpdateDraft = () => {
-            store.dispatch(action.onUpdateDraft)
+            store.dispatch(action.updateDraft())
         }
         
         const dispatchers = {onAdd, onUpdateDraft, }

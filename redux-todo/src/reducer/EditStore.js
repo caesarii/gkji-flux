@@ -23,7 +23,7 @@ import actionType from '../action/acitonType'
 //     }
 // }
 
-const TodoEditReducer = (state, action) => {
+const TodoEditReducer = (state={editing: ''}, action) => {
     switch (action.type) {
         case actionType.startEditTodo:
             return action.data

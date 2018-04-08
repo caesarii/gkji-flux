@@ -52,7 +52,7 @@ import ationType from '../action/acitonType'
 //     }
 // }
 
-const TodoReducer = (state, action) => {
+const TodoReducer = (state = {todos: []}, action) => {
     switch (action.type) {
         case ationType.addTodo:
             // Don't add todos with no text.
