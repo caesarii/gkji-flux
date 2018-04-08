@@ -38,18 +38,16 @@ class Main extends Component {
         }
         
         const onStartEditingTodo = () => {
-            store.dispatch(action.startEditingTodo())
+            store.dispatch(action.startEditTodo())
         }
         
         const onStopEditingTodo = () => {
-            store.dispatch(action.stopEditingTodo())
+            store.dispatch(action.stopEditTodo())
         }
         
         const onToggleTodo = () => {
             store.dispatch(action.onToggleTodo)
         }
-        
-        
         
         
         const dispatchers = {

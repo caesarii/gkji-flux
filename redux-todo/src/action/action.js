@@ -29,14 +29,14 @@ const Actions = {
         }
     },
     
-    startEditingTodo (id) {
+    startEditTodo (id) {
         return {
             type: actionType.startEditTodo,
             data: id,
         }
     },
     
-    stopEditingTodo () {
+    stopEditTodo () {
         return {
             type: actionType.stopEditTodo,
         }

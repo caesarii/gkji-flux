@@ -5,7 +5,7 @@ import Footer from '../footer'
 import './index.css'
 
 function AppView (props) {
-    // console.log('props', props)
+    console.log('props', props)
     return (
       <div className="container">
           <div className="todoapp">
