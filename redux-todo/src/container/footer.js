@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 
 import {createStore, } from 'redux'
-import HeaderView from '../view/header'
+import FooterView from '../view/footer'
 import action from '../action/action'
-import TodoReducer from '../reducer/TodoStore'
+import TodoReducer from '../reducer/TodoReducer'
 
 const store = createStore(TodoReducer)
 
@@ -12,7 +12,7 @@ class footer extends Component {
         super(props)
         this.store = store
         // 初始状态
-        this.state = this.store.getState()
+        this.state = {todos: this.store.getState()}
     }
     
     render () {
@@ -20,7 +20,7 @@ class footer extends Component {
         
         // update
         store.subscribe(() => {
-            this.setState(store.getState())
+            this.setState({todo: store.getState()})
             console.log('new state', store.getState())
         })
         
@@ -33,7 +33,7 @@ class footer extends Component {
         
         // 以这种形式传递 state 和 dispatchers 模仿 mapStateToProps, mapDispatcherToProps
         return (
-          <HeaderView {...state} {...dispatchers}/>
+          <FooterView {...state} {...dispatchers}/>
         )
     }
 }

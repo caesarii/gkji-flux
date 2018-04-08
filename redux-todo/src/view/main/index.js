@@ -5,7 +5,8 @@ import './index.css'
 
 function Main(props) {
     const {todos} = props
-    if(todos.size === 0) {
+    if(!todos || todos.size === 0) {
+        console.log('main null')
         return null
     }
 

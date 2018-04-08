@@ -21,6 +21,7 @@ function NewTodo(props) {
     //     onAdd(draft)
     // }
     const onChange = (e) => {
+        console.log('valu', e.target.value)
         onUpdateDraft(e.target.value)
     }
     const onBlur = () => {

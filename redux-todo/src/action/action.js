@@ -1,5 +1,5 @@
 import actionType from './acitonType'
-
+const log = console.log
 const Actions = {
     addTodo (text) {
         return {

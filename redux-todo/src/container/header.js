@@ -11,7 +11,7 @@ class Header extends Component {
         super(props)
         this.store = store
         // 初始状态
-        this.state = this.store.getState()
+        this.state = {draft: this.store.getState()}
     }
     
     render () {
@@ -19,28 +19,22 @@ class Header extends Component {
         
         // update
         store.subscribe(() => {
-            this.setState(store.getState())
-            console.log('new state', store.getState())
+            const newState = {draft: store.getState()}
+            this.setState(newState)
+            console.log('header new state', newState)
         })
         
-        // const onClickCounter = (type, number) => {
-        //     if (type === actionType.increase) {
-        //         store.dispatch(actionCreator.increaseNumber(number))
-        //     } else if (type === actionType.decrease) {
-        //         store.dispatch(actionCreator.decreaseNumber(number))
-        //     }
-        // }
-        //
-        const onAdd = () => {
-            store.dispatch(action.addTodo())
+        const onAdd = (draft) => {
+            console.log('onAdd')
+            store.dispatch(action.addTodo(draft))
         }
         
-        const onUpdateDraft = () => {
-            store.dispatch(action.updateDraft())
+        const onUpdateDraft = (draft) => {
+            store.dispatch(action.updateDraft(draft))
         }
         
         const dispatchers = {onAdd, onUpdateDraft, }
-        
+        console.log('state', state)
         // 以这种形式传递 state 和 dispatchers 模仿 mapStateToProps, mapDispatcherToProps
         return (
           <HeaderView {...state} {...dispatchers}/>

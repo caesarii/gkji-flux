@@ -1,8 +1,9 @@
+import React from 'react'
 import './index.css'
 
 function Footer(props) {
     const {todos, onDeleteCompletedTodos} = props
-    if(todos.size === 0) {
+    if(!todos || todos.size === 0) {
         return null
     }
     const remaining = todos.filter((todo) => {

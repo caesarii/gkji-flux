@@ -4,15 +4,13 @@ import Main from '../../container/main'
 import Footer from '../../container/footer'
 import './index.css'
 
-function AppView (props) {
-    console.log('props', props)
+function AppView () {
     return (
       <div className="container">
           <div className="todoapp">
             <Header />
             <Main />
             <Footer />
-            
         </div>
           <div className="info">
                 <p>Double-click to edit a todo</p>

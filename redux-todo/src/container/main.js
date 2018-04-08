@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import {createStore, combineReducers} from 'redux'
-import HeaderView from '../view/header'
+import MainView from '../view/main'
 import action from '../action/action'
-import TodoReducer from '../reducer/TodoStore'
-import editReducer from '../reducer/EditStore'
+import TodoReducer from '../reducer/TodoReducer'
+import EditReducer from '../reducer/EditReducer'
 
-const reducer = combineReducers({TodoReducer, editReducer})
+const reducer = combineReducers({TodoReducer, EditReducer})
 const store = createStore(reducer)
 
 class Main extends Component {
@@ -21,32 +21,32 @@ class Main extends Component {
         
         // update
         store.subscribe(() => {
-            this.setState(store.getState())
-            console.log('new state', store.getState())
+            this.setState({editing: store.getState()})
+            console.log('main new state', store.getState())
         })
         
         const onToggleAllTodos = () => {
             store.dispatch(action.toggleAllTodos())
         }
         
-        const onDeleteTodo = () => {
-            store.dispatch(action.deleteTodo())
+        const onDeleteTodo = (id) => {
+            store.dispatch(action.deleteTodo(id))
         }
         
-        const onEditTodo = () => {
-            store.dispatch(action.editTodo())
+        const onEditTodo = (id, draft) => {
+            store.dispatch(action.editTodo(id, draft))
         }
         
-        const onStartEditingTodo = () => {
-            store.dispatch(action.startEditTodo())
+        const onStartEditingTodo = (id) => {
+            store.dispatch(action.startEditTodo(id))
         }
         
         const onStopEditingTodo = () => {
             store.dispatch(action.stopEditTodo())
         }
         
-        const onToggleTodo = () => {
-            store.dispatch(action.onToggleTodo)
+        const onToggleTodo = (id) => {
+            store.dispatch(action.onToggleTodo(id))
         }
         
         
@@ -61,7 +61,7 @@ class Main extends Component {
         
         // 以这种形式传递 state 和 dispatchers 模仿 mapStateToProps, mapDispatcherToProps
         return (
-          <HeaderView {...state} {...dispatchers}/>
+          <MainView {...state} {...dispatchers}/>
         )
     }
 }
