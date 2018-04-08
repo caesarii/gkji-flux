@@ -13,16 +13,17 @@ function Header(props) {
 function NewTodo(props) {
     const ENTER_KEY_CODE = 13
     const {draft, onAdd, onUpdateDraft} = props
-
-    // const addTodo = () => {
-    //     onAdd(draft)
-    // }
+    
+    // 编辑
     const onChange = (e) => {
         onUpdateDraft(e.target.value)
     }
+    // 停止编辑
     const onBlur = () => {
         onAdd(draft)
     }
+    
+    // 编辑完成
     const onKeyDown = (e) => {
         if(e.keyCode === ENTER_KEY_CODE) {
             onAdd(draft)

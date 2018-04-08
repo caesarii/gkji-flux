@@ -25,7 +25,7 @@ function getState() {
     onDeleteTodo: action.deleteTodo,
     onEditTodo: action.editTodo,
     onStartEditingTodo: action.startEditTodo,
-    onStopEditingTodo: action.stopEditingTodo,
+    onStopEditingTodo: action.stopEditTodo,
     onToggleAllTodos: action.toggleAllTodos,
     onToggleTodo: action.toggleTodo,
     onUpdateDraft: action.updateDraft,

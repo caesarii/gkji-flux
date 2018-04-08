@@ -39,6 +39,7 @@ function ToggleBtn(props) {
 }
 
 function TodoList(props) {
+    
     const {
         todos,
         editing,
@@ -75,7 +76,7 @@ function TodoItem(props) {
         onDeleteTodo(todo.id)
     }
     const onStartEditing = () => {
-        onToggleTodo(todo.id)
+        onStartEditingTodo(todo.id)
     }
     const onToggle = () => {
         onToggleTodo(todo.id)
