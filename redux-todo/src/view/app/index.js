@@ -1,7 +1,7 @@
 import React from 'react'
-import Header from '../header'
-import Main from '../main'
-import Footer from '../footer'
+import Header from '../../container/header'
+import Main from '../../container/main'
+import Footer from '../../container/footer'
 import './index.css'
 
 function AppView (props) {
@@ -9,9 +9,9 @@ function AppView (props) {
     return (
       <div className="container">
           <div className="todoapp">
-            <Header {...props} />
-            <Main {...props} />
-            <Footer {...props} />
+            <Header />
+            <Main />
+            <Footer />
             
         </div>
           <div className="info">

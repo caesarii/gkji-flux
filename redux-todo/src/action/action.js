@@ -58,7 +58,7 @@ const Actions = {
     updateDraft (text) {
         return {
             type: actionType.updateDraft,
-            data: ßtext,
+            data: text,
         }
     },
 }

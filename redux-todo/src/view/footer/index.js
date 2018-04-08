@@ -1,4 +1,3 @@
-import React from 'react'
 import './index.css'
 
 function Footer(props) {
