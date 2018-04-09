@@ -4,18 +4,19 @@ import Todo from './Todo'
 import ationType from '../action/acitonType'
 
 const TodoReducer = (state = Immutable.OrderedMap(), action) => {
+    console.log('todos reducer', state, action)
     switch (action.type) {
-        // case ationType.addTodo:
-        //     // Don't add todos with no text.
-        //     if (!action.text) {
-        //         return state
-        //     }
-        //     const id = Counter.increment()
-        //     return state.set(id, new Todo({
-        //         id,
-        //         text: action.text,
-        //         complete: false,
-        //     }))
+        case ationType.addTodo:
+            // Don't add todos with no text.
+            if (!action.text) {
+                return state
+            }
+            const id = Counter.increment()
+            return state.set(id, new Todo({
+                id,
+                text: action.text,
+                complete: false,
+            }))
         
         case ationType.deleteCompletedTodo:
             return state.filter(todo => !todo.complete)

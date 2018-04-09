@@ -3,7 +3,6 @@ import React from 'react'
 
 import './index.css'
 function Header(props) {
-    console.log('props 1', props)
     return (
         <header className='header'>
             <h1 className='title'>Todos</h1>
@@ -14,23 +13,21 @@ function Header(props) {
 
 function NewTodo(props) {
     const ENTER_KEY_CODE = 13
-    console.log('props 2', props)
-    const {draft, onAdd, onUpdateDraft} = props
+    const {draft, addTodo, updateDraft} = props
 
     // const addTodo = () => {
     //     onAdd(draft)
     // }
     const onChange = (e) => {
-        console.log('valu', e.target.value)
-        onUpdateDraft(e.target.value)
+        updateDraft(e.target.value)
     }
     const onBlur = () => {
-        console.log('error', typeof onAdd, onAdd)
-        onAdd(draft)
+        // console.log('error', typeof onAdd, onAdd)
+        addTodo(draft)
     }
     const onKeyDown = (e) => {
         if(e.keyCode === ENTER_KEY_CODE) {
-            onAdd(draft)
+            addTodo(draft)
         }
     }
     return (

@@ -2,7 +2,7 @@ import React from 'react'
 import './index.css'
 
 function Footer(props) {
-    const {todos, onDeleteCompletedTodos} = props
+    const {todos, deleteCompletedTodos} = props
     if(!todos || todos.size === 0) {
         return null
     }
@@ -17,7 +17,7 @@ function Footer(props) {
         clearCompletedButton =
             <button
                 className='clear-completed'
-                onClick={onDeleteCompletedTodos}
+                onClick={deleteCompletedTodos}
             >
                Clear completed ({completed})
             </button>

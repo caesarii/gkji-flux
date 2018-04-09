@@ -6,9 +6,10 @@ import './index.css'
 function Main(props) {
     const {todos} = props
     if(!todos || todos.size === 0) {
-        console.log('main null')
         return null
     }
+    
+    console.log('main view', props)
 
     return (
         <section className="main">
@@ -20,7 +21,7 @@ function Main(props) {
 }
 
 function ToggleBtn(props) {
-    const {todos, onToggleAllTodos} = props
+    const {todos, toggleAllTodos} = props
     const areAllComplete = todos.every((todo) => {
         return todo.completed
     })
@@ -30,7 +31,7 @@ function ToggleBtn(props) {
                 type="checkbox"
                 className="toggle-all"
                 checked={areAllComplete ? 'checked' : ''}
-                onChange={onToggleAllTodos}
+                onChange={toggleAllTodos}
             />
             <label htmlFor="toggle-all">
                 Mark all as complete
@@ -43,11 +44,11 @@ function TodoList(props) {
     const {
         todos,
         editing,
-        onDeleteTodo,
-        onEditTodo,
-        onStartEditingTodo,
-        onStopEditingTodo,
-        onToggleTodo
+        deleteTodo,
+        editTodo,
+        startEditingTodo,
+        stopEditingTodo,
+        toggleTodo
     }
         = props
     return (
@@ -57,11 +58,11 @@ function TodoList(props) {
                     key={todo.id}
                     editing={editing}
                     todo={todo}
-                    onDeleteTodo={onDeleteTodo}
-                    onEditTodo={onEditTodo}
-                    onStartEditingTodo={onStartEditingTodo}
-                    onStopEditingTodo={onStopEditingTodo}
-                    onToggleTodo={onToggleTodo}
+                    onDeleteTodo={deleteTodo}
+                    onEditTodo={editTodo}
+                    onStartEditingTodo={startEditingTodo}
+                    onStopEditingTodo={stopEditingTodo}
+                    onToggleTodo={toggleTodo}
                 />)
             })}
         </ul>
