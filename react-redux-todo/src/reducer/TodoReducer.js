@@ -8,24 +8,30 @@ const TodoReducer = (state = Immutable.OrderedMap(), action) => {
     switch (action.type) {
         case ationType.addTodo:
             // Don't add todos with no text.
-            if (!action.text) {
+            
+            if (!action.data) {
                 return state
             }
+            
             const id = Counter.increment()
-            return state.set(id, new Todo({
-                id,
-                text: action.text,
-                complete: false,
-            }))
+            state = state.set(id, new Todo({
+                  id,
+                  text: action.data,
+                  complete: false,
+              })
+            )
+            console.log('staetttttt', state)
+
+            return state
         
         case ationType.deleteCompletedTodo:
             return state.filter(todo => !todo.complete)
         
         case ationType.deleteTodo:
-            return state.delete(action.id)
+            return state.delete(action.data)
         
         case ationType.editTodo:
-            return state.setIn([action.id, 'text'], action.text)
+            return state.setIn([action.data, 'text'], action.data)
         
         case ationType.toggleAllTodo:
             const areAllComplete = state.every(todo => todo.complete)
@@ -33,7 +39,7 @@ const TodoReducer = (state = Immutable.OrderedMap(), action) => {
         
         case ationType.toggleTodo:
             return state.update(
-              action.id,
+              action.data,
               todo => todo.set('complete', !todo.complete),
             )
         

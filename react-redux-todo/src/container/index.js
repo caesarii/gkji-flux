@@ -6,6 +6,7 @@ import AppView from '../view/app'
 import action from '../action/action'
 
 const mapStateToProps = (state) => {
+    console.log('new state', state)
     return {
         todos: state.todos,
         draft: state.draft,
