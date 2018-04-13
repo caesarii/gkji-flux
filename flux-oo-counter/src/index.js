@@ -1,9 +1,10 @@
 import React from 'react';
 import {render} from 'react-dom';
+import App from './components';
+import store from './store'
 
-import App from './container';
-
+const states = store.states()
 render(
-    <App />,
+    <App {...states}/>,
     document.getElementById('root')
 );
