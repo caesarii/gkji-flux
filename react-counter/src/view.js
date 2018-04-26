@@ -8,6 +8,7 @@ class AppView extends React.Component {
             current: 1
         }
         this.onClickCounter = this.onClickCounter.bind(this)
+        this.onShow = this.onShow.bind(this)
     }
     
     onClickCounter(type, value) {
@@ -17,7 +18,8 @@ class AppView extends React.Component {
                 prev.current += 1
                 log('状态有没有按预想的更新', prev.current)
                 return {
-                    current: prev.current
+                    current: prev.current,
+                    show: false
                 }
             })
         } else {
@@ -27,6 +29,14 @@ class AppView extends React.Component {
                 }
             })
         }
+    }
+    
+    onShow() {
+        this.setState(prev => {
+            return {
+                show: !prev.show
+            }
+        })
     }
     
     render () {
@@ -40,6 +50,8 @@ class AppView extends React.Component {
               <div>Current: {current}</div>
               <button onClick={e => {onClickCounter('increase', current)}}>+1</button>
               <button onClick={e => {onClickCounter('decrease', current)}}>-1</button>
+              <button onClick={this.onShow}>click me</button>
+              {this.state.show && <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis, rem.</div>}
           </div>
         )
     }
