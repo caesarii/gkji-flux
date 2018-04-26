@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-
+const log = console.log
 
 class AppView extends React.Component {
     constructor (props) {
@@ -11,11 +11,13 @@ class AppView extends React.Component {
     }
     
     onClickCounter(type, value) {
-        
+        log('回调有没有调用')
         if(type === 'increase') {
             this.setState((prev) => {
+                prev.current += 1
+                log('状态有没有按预想的更新', prev.current)
                 return {
-                    current: ++prev.current
+                    current: prev.current
                 }
             })
         } else {
@@ -30,7 +32,8 @@ class AppView extends React.Component {
     render () {
         const {state, onClickCounter} = this
         const {current} = state
-                console.log('cuu', current)
+        
+        log('有没有 render')
 
         return (
           <div>
