@@ -8,7 +8,7 @@ class AppView extends React.Component {
             current: 1
         }
         this.onClickCounter = this.onClickCounter.bind(this)
-        this.onShow = this.onShow.bind(this)
+        this.toggle = this.onShow.bind(this)
     }
     
     onClickCounter(type, value) {
