@@ -1,4 +1,4 @@
-# Todo-MVC
+# Flux-Getting-Started
 类 FLux 框架快速上手项目, 使用 React + Flux Utils / redux / react-redux / mobx 实现多个简单应用
 
 ### Counter
