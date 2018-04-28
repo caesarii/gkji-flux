@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import Mask from 'Mask'
+import Mask from './Mask'
 const log = console.log
 
 class AppView extends React.Component {
