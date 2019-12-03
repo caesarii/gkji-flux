@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { observable, action } from 'mobx'
+import React from 'react'
+import { action } from 'mobx'
 import { observer } from 'mobx-react'
 
 @observer
@@ -18,13 +18,13 @@ class Counter extends React.Component {
     @action
     handleIncrease = e => {
         const { increase, count } = this.props.store
-        increase.call(this.props.store, count)
+        increase.call(this.props.store, count+1)
     }
     
     @action
     handleDecrease = e => {
         const { decrease, count } = this.props.store
-        decrease.call(this.props.store, count)
+        decrease.call(this.props.store, count-1)
     }
 }
 
