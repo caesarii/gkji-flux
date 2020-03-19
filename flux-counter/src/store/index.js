@@ -1,6 +1,7 @@
 import actionTypes from '../action/actionTypes'
-import {ReduceStore} from 'flux/utils'
+import {ReduceStore} from '../flux/index'
 import dispatcher from '../action/dispatcher'
+
 
 class CounterStore extends ReduceStore {
     constructor() {

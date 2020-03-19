@@ -1,5 +1,5 @@
 
-import {Dispatcher} from 'flux'
+import {Dispatcher} from '../flux/index'
 
 export default new Dispatcher()
 

@@ -1,4 +1,4 @@
-import {Container} from 'flux/utils'
+import {Container} from '../flux/index'
 import action from '../action/index'
 import AppView from '../components/counter'
 import React, { Component } from 'react'
